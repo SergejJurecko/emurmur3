@@ -1,0 +1,13 @@
+{application, emurmur3,
+ [
+  {description, "erlang murmur3 nif"},
+  {vsn, "1"},
+  {modules, [emurmur3]},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {env, []}
+ ]}.
+
