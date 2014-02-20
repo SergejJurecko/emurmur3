@@ -25,7 +25,7 @@ ERL_NIF_TERM hash_x86_32(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
     if (argc != 2)
         return false;
-    if (!enif_inspect_binary(env, argv[0], &bin))
+    if (!enif_inspect_iolist_as_binary(env, argv[0], &bin))
         return enif_make_badarg(env);
     if (!enif_get_uint(env, argv[1], &seed))
         return enif_make_badarg(env);
@@ -43,7 +43,7 @@ ERL_NIF_TERM hash_x86_128(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
     if (argc != 2)
         return false;
-    if (!enif_inspect_binary(env, argv[0], &bin))
+    if (!enif_inspect_iolist_as_binary(env, argv[0], &bin))
         return enif_make_badarg(env);
     if (!enif_get_uint(env, argv[1], &seed))
         return enif_make_badarg(env);
@@ -61,7 +61,7 @@ ERL_NIF_TERM hash_x64_128(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
     if (argc != 2)
         return false;
-    if (!enif_inspect_binary(env, argv[0], &bin))
+    if (!enif_inspect_iolist_as_binary(env, argv[0], &bin))
         return enif_make_badarg(env);
     if (!enif_get_uint(env, argv[1], &seed))
         return enif_make_badarg(env);
