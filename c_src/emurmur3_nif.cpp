@@ -1,6 +1,8 @@
 #include <erl_nif.h>
 #include "MurmurHash3.h"
-
+#ifdef  _WIN32
+#include <memory.h>
+#endif
 extern "C" {
 
 ERL_NIF_TERM hash_x86_32(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[]);
@@ -25,9 +27,9 @@ ERL_NIF_TERM hash_x86_32(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
     if (argc != 2)
         return false;
-    if (!enif_inspect_binary(env, argv[0], &bin))
+    if (!enif_inspect_iolist_as_binary(env, argv[0], &bin))
         return enif_make_badarg(env);
-    if (!enif_get_uint(env, argv[1], &seed))
+    if (!enif_get_uint(env, argv[1], (unsigned int*)&seed))
         return enif_make_badarg(env);
 
     MurmurHash3_x86_32(bin.data, bin.size, seed, &h);
@@ -43,9 +45,9 @@ ERL_NIF_TERM hash_x86_128(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
     if (argc != 2)
         return false;
-    if (!enif_inspect_binary(env, argv[0], &bin))
+    if (!enif_inspect_iolist_as_binary(env, argv[0], &bin))
         return enif_make_badarg(env);
-    if (!enif_get_uint(env, argv[1], &seed))
+    if (!enif_get_uint(env, argv[1], (unsigned int*)&seed))
         return enif_make_badarg(env);
 
     MurmurHash3_x86_128(bin.data, bin.size, seed, &h);
@@ -61,9 +63,9 @@ ERL_NIF_TERM hash_x64_128(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
     if (argc != 2)
         return false;
-    if (!enif_inspect_binary(env, argv[0], &bin))
+    if (!enif_inspect_iolist_as_binary(env, argv[0], &bin))
         return enif_make_badarg(env);
-    if (!enif_get_uint(env, argv[1], &seed))
+    if (!enif_get_uint(env, argv[1], (unsigned int*)&seed))
         return enif_make_badarg(env);
 
     MurmurHash3_x64_128(bin.data, bin.size, seed, &h);
