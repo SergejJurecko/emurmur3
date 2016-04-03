@@ -40,7 +40,7 @@ ERL_NIF_TERM hash_x86_32(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 ERL_NIF_TERM hash_x86_128(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
     ErlNifBinary bin;
-    uint32_t h;
+    uint64_t h;
     uint32_t seed;
 
     if (argc != 2)
@@ -52,13 +52,13 @@ ERL_NIF_TERM hash_x86_128(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
     MurmurHash3_x86_128(bin.data, bin.size, seed, &h);
 
-    return enif_make_uint(env, h);
+    return enif_make_uint64(env, h);
 }
 
 ERL_NIF_TERM hash_x64_128(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
     ErlNifBinary bin;
-    uint32_t h;
+    uint64_t h;
     uint32_t seed;
 
     if (argc != 2)
@@ -70,7 +70,7 @@ ERL_NIF_TERM hash_x64_128(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
     MurmurHash3_x64_128(bin.data, bin.size, seed, &h);
 
-    return enif_make_uint(env, h);
+    return enif_make_uint64(env, h);
 }
 
 
