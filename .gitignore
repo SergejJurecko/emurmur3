@@ -1,0 +1,8 @@
+_build/
+*.swp
+*.dump
+*.log
+rebar.lock
+c_src/*.o
+priv/*.so
+c_src/*.d
